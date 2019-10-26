@@ -1,0 +1,18 @@
+{
+  "name": "Translation_Transcription_Docs_Creator",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Nikitenko Dmitry",
+  "dependencies": {
+    "docx": "^5.0.0-rc7",
+    "file-saver": "^2.0.2",
+    "file-system": "^2.2.2",
+    "mammoth": "^1.4.8"
+  },
+  "devDependencies": {
+    "browserify": "latest"
+  },
+  "scripts": {
+    "build-js": "browserify src/script.js > index.js"
+  }
+}
