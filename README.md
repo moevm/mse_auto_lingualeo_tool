@@ -16,6 +16,8 @@
 
 Далее требуется установить требующиеся пакеты. Данные действия рекомендуется производить в виртуальном окружении.
 ```
+git clone https://github.com/moevm/mse_auto_lingualeo_tool.git
+cd mse_auto_lingualeo_tool/Sets_Manager
 virtualenv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
