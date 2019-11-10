@@ -3,9 +3,6 @@ import sys
 from lingua_docx import lingua_docx_parser
 from lingua_service import lingualeo_service
 
-# Email и пароль для авторизации в Lingualeo
-EMAIL = 'pet.ai.4.uk@yandex.ru'
-PASSWORD = 'Wake up, man.1900'
 
 # Email и пароль для авторизации в Lingualeo
 EMAIL = 'pet.ai.4.uk@yandex.ru'
