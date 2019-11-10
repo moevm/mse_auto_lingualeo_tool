@@ -5,8 +5,8 @@ from lingua_service import lingualeo_service
 
 
 # Email и пароль для авторизации в Lingualeo
-EMAIL = 'pet.ai.4.uk@yandex.ru'
-PASSWORD = 'Wakeupman4981'
+EMAIL = ''
+PASSWORD = ''
 
 
 # Функция добавления набора слов в Lingualeo
@@ -32,12 +32,10 @@ def create_parser():
 def create_set(set_name, docx_name):
     if docx_name.endswith(".docx"):
         print("Creating set \"{0}\" from file \"{1}\"".format(set_name, docx_name))
-        try: 
-            docx_file = lingua_docx_parser(docx_name)
-            print(docx_file.create_words_set())
-        except IndexError:
-            print("Incorrect file content: every word needs a translation.")
-            return
+        docx_file = lingua_docx_parser(docx_name)
+        words_set = docx_file.create_words_set()
+        for elem in words_set:
+            print(elem)
     else:
         print("Incorrect file format")
 
@@ -46,13 +44,10 @@ def create_set(set_name, docx_name):
 def add_words_to_set(set_name, docx_name):
     if docx_name.endswith(".docx"):
         print("Adding to set \"{0}\" with words from file \"{1}\"".format(set_name, docx_name))
-        try: 
-            docx_file = lingua_docx_parser(docx_name)
-            word_set = docx_file.create_words_set()
-            add_word_set(word_set)
-        except IndexError:
-            print("Incorrect file content: every word needs a translation.")
-            return
+        docx_file = lingua_docx_parser(docx_name)
+        words_set = docx_file.create_words_set()
+        for elem in words_set:
+            print(elem)
     else:
         print("Incorrect file format")
 
