@@ -1,5 +1,4 @@
 from docx import Document
-import re
 
 
 # Класс парсера docx файла, хранящего в себе набор слов для серсива Lingualeo
@@ -19,7 +18,7 @@ class lingua_docx_parser:
     def create_words_set(self):
         words_set = []
         for paragraph in self.docx_document.paragraphs:
-            words_set_elem_parts = paragraph.text.split('-')
+            words_set_elem_parts = paragraph.text.split('—')
             words_set_elem = dict.fromkeys(["word", "transcription", "translation"])
             if words_set_elem_parts[0]:
                 if len(words_set_elem_parts) == 3:
