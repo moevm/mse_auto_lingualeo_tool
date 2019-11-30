@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Security-Policy" content="default-src *;">
         <title>Экспорт слов с транскрипцией и переводом</title>
         <script src="https://unpkg.com/docx@4.0.0/build/index.js"></script>
+
     </head>
     <body>
 
@@ -14,13 +15,15 @@
         <input id="transcription">
         <p>Перевод слова:</p>
         <input id="translation">
-        <p></p>
+        <button id="translate">Перевести</button>
         <button id="addSet">Добавить в набор</button>
         <hr>
         <p>Введите название набора</p>
         <input type="Text" id="wordSetName" placeholder="Название набора"/>
         <p></p>
         <button id="export">Экспорт набора</button>
+
         <script src="index.js"></script>
+
     </body>
 </html>
