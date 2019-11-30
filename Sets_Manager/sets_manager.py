@@ -41,29 +41,29 @@ def add_word_set(email, password, words_set):
 # Функция добавления слов из docx файла в набор слов
 def add_words_to_set(set_name, docx_name, email, password):
     if docx_name.endswith(".docx"):
-        print("Adding to set \"{0}\" with words from file \"{1}\"".format(set_name, docx_name))
+        print("Добавление в набор слов \"{0}\" слов из файла \"{1}\"".format(set_name, docx_name))
         docx_file = lingua_docx_parser(docx_name)
         words_set = docx_file.create_words_set()
         add_word_set(email, password, words_set)
     else:
-        print("Incorrect file format")
+        print("Некорректный формат файла")
 
 
 # Функция создания набора слов на основе docx файла
 def create_set(set_name, docx_name, email, password):
     if docx_name.endswith(".docx"):
-        print("Creating set \"{0}\" from file \"{1}\"".format(set_name, docx_name))
+        print("Создание набора слов \"{0}\" из файла \"{1}\"".format(set_name, docx_name))
         docx_file = lingua_docx_parser(docx_name)
         words_set = docx_file.create_words_set()
         for elem in words_set:
             print(elem)
     else:
-        print("Incorrect file format")
+        print("Некорректный формат файла")
 
 
 # Функция переименовывания набора слов
 def rename_set(old_name, new_name, email, password):
-    print("Renaming set \"{0}\" to \"{1}\"".format(old_name, new_name))
+    print("Переименование набора слов \"{0}\" на \"{1}\"".format(old_name, new_name))
 
 
 # Функция обработки агрументов командной строки
