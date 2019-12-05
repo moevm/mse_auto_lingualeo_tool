@@ -2,7 +2,7 @@ import argparse
 import sys
 import getpass
 from lingua_docx import lingua_docx_parser
-from lingua_service import lingualeo_service
+from lingua_service import LingualeoService
 
 
 # Функция для создания интерфейса командной строки
@@ -23,7 +23,7 @@ def input_auth_data():
 
 # Функция добавления набора слов в Lingualeo
 def add_word_set(email, password, words_set):
-    lingualeo = lingualeo_service(email, password)
+    lingualeo = LingualeoService(email, password)
     auth_res = lingualeo.auth()
     print(auth_res['error_msg'])
     if not auth_res['error_msg']:
