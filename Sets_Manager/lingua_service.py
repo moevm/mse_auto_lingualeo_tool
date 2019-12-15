@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 
 # Класс для работы с сервисом Lingualeo
@@ -8,7 +9,6 @@ class lingualeo_service:
         self.session = requests.Session()
         self.email = email
         self.password = password
-        
 
     # Авторизация в Lingauleo, необходимое для дальнейшей работы
     def auth(self):
@@ -17,7 +17,6 @@ class lingualeo_service:
         response = self.session.post(url, data=params)
         return json.loads(response.text)
 
-
     # Функция добавления одного слова в набор слов Lingualeo
     def add_word(self, word, translate, context):
         url = 'https://api.lingualeo.com/AddWord'
@@ -25,30 +24,32 @@ class lingualeo_service:
         response = self.session.post(url, data=params)
         return json.loads(response.text)
 
-
     # Функция создания набора слов с данным именем
     def create_words_set(self, name):
         url = 'https://api.lingualeo.com/SetWordSets'
-        params = {
-          "apiVersion": "1.0.0",
-          "op": "createWordSet",
-          "data": [
-            {
-              "action": "add",
-              "valueList": {
-                "name": "Название набора",
-                "picture": None
-              }
-            }
-          ],
-          "ctx": {
-            "config": {
-              "isCheckData": True,
-              "isLogging": True
-            }
-          }
-        }
-        print(json.dumps(params))
-        response = self.session.post(url, data=json.dumps(params))
-        return json.loads(response.text)
 
+        options_headers = {
+            'Host': 'api.lingualeo.com',
+            'Access-Control-Request-Method': 'POST',
+            'Origin': 'https://lingualeo.com',
+            'Access-Control-Request-Headers': 'content-type',
+            'Accept': '*/*',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
+        }
+
+        post_headers = {
+            'Host': 'api.lingualeo.com',
+            'Accept': 'application/json',
+            'Origin': 'https://lingualeo.com',
+            'Content-type': 'application/json',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
+        }
+
+        params = '{"apiVersion":"1.0.0","op":"createWordSet","data":[{"action":"add","valueList":{"name":"%s","picture":null}}],"ctx":{"config":{"isCheckData":true,"isLogging":true}}}' % name
+        options_response = self.session.options(url, headers=options_headers)
+        post_response = self.session.post(url, data=params, headers=post_headers)
+        return json.loads(post_response.text)
