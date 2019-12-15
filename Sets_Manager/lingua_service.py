@@ -25,3 +25,30 @@ class lingualeo_service:
         response = self.session.post(url, data=params)
         return json.loads(response.text)
 
+
+    # Функция создания набора слов с данным именем
+    def create_words_set(self, name):
+        url = 'https://api.lingualeo.com/SetWordSets'
+        params = {
+          "apiVersion": "1.0.0",
+          "op": "createWordSet",
+          "data": [
+            {
+              "action": "add",
+              "valueList": {
+                "name": "Название набора",
+                "picture": None
+              }
+            }
+          ],
+          "ctx": {
+            "config": {
+              "isCheckData": True,
+              "isLogging": True
+            }
+          }
+        }
+        print(json.dumps(params))
+        response = self.session.post(url, data=json.dumps(params))
+        return json.loads(response.text)
+
