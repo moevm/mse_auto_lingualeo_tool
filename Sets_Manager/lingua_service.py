@@ -4,7 +4,7 @@ import requests
 
 
 # Класс для работы с сервисом Lingualeo
-class lingualeo_service:
+class LingualeoService:
     def __init__(self, email, password):
         self.session = requests.Session()
         self.email = email

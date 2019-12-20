@@ -2,7 +2,7 @@ import argparse
 import sys
 import getpass
 from lingua_docx import lingua_docx_parser
-from lingua_service import lingualeo_service
+from lingua_service import LingualeoService
 
 
 # Функция для создания интерфейса командной строки

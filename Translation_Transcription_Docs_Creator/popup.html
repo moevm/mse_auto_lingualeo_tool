@@ -2,19 +2,28 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *;">
         <title>Экспорт слов с транскрипцией и переводом</title>
+        <script src="https://unpkg.com/docx@4.0.0/build/index.js"></script>
+
     </head>
     <body>
+
         <p>Введите слово для добавления:</p>
-        <input>
-        <p>Введите имя документа для экспорта:</p>
-        <input>
-        <hr>
+        <input id="word">
         <p>Транскрипция слова:</p>
-        <input>
+        <input id="transcription">
         <p>Перевод слова:</p>
-        <input>
+        <input id="translation">
+        <button id="translate">Перевести</button>
+        <button id="addSet">Добавить в набор</button>
         <hr>
-        <button>Экспорт слова</button>
+        <p>Введите название набора</p>
+        <input type="Text" id="wordSetName" placeholder="Название набора"/>
+        <p></p>
+        <button id="export">Экспорт набора</button>
+
+        <script src="index.js"></script>
+
     </body>
 </html>

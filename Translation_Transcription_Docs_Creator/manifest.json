@@ -4,15 +4,24 @@
     "description": "Данное расширение предназначено для сервиса Lingua Leo для экспортирования выбранных преподавателем слов с транскрипцией и переводом",
     "version": "1.0.0",
     "icons": {
-         "16": "16.png",
-         "48": "48.png",
-         "128": "128.png"
+         "16": "icons/16.png",
+         "48": "icons/48.png",
+         "128": "icons/128.png"
      },
-    "browser_action": {},
-    "permissions": [],
+    "permissions": [
+      "https://unpkg.com/docx@4.0.0/build/index.js",
+      "tabs",
+      "<all_urls>"
+    ],
+
+    "content_security_policy": "script-src 'self' https://unpkg.com; object-src 'self'",
+    "content_scripts": [{
+      "matches": [ "*://*/*" ],
+      "js": ["index.js"]
+    }],
     "browser_action": {
         "default_title": "T/T Export",
-        "default_icon": "128.png",
-        "default_popup": "popup.html"
+        "default_icon": "icons/128.png",
+        "default_popup":"popup.html"
     }
 }
