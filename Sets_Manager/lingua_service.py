@@ -21,28 +21,37 @@ class LingualeoService:
     # Функция получения списка наборов слов TODO
     def get_word_sets(self):
         url = 'https://api.lingualeo.com/GetWordSets'
-        options_headers = {
-            'Host': 'api.lingualeo.com',
-            'Access-Control-Request-Method': 'POST',
-            'Origin': 'https://lingualeo.com',
-            'Access-Control-Request-Headers': 'content-type',
-            'Accept': '*/*',
-            'Sec-Fetch-Site': 'same-site',
-            'Sec-Fetch-Mode': 'cors',
-            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
+        params = {
+          "apiVersion": "1.0.0",
+          "op": "loadSets: \n[\n  {\n    \"req\": \"myAll\",\n    \"opts\": {\n      \"category\": \"all\",\n      \"page\": 1,\n      \"perPage\": 20\n    },\n    \"attrs\": [\n      \"type\",\n      \"id\",\n      \"name\",\n      \"countWords\",\n      \"countWordsLearned\",\n      \"picture\",\n      \"category\",\n      \"status\",\n      \"source\",\n      \"level\"\n    ]\n  }\n]",
+          "request": [
+            {
+              "subOp": "myAll",
+              "type": "user",
+              "perPage": 999,
+              "sortBy": "created",
+              "attrList": {
+                "type": "type",
+                "id": "id",
+                "name": "name",
+                "countWords": "cw",
+                "countWordsLearned": "cl",
+                "wordSetId": "wordSetId",
+                "picture": "pic",
+                "category": "cat",
+                "status": "st",
+                "source": "src"
+              }
+            }
+          ],
+          "ctx": {
+            "config": {
+              "isCheckData": True,
+              "isLogging": True
+            }
+          }
         }
-        post_headers = {
-            'Host': 'api.lingualeo.com',
-            'Accept': 'application/json',
-            'Origin': 'https://lingualeo.com',
-            'Content-type': 'application/json',
-            'Sec-Fetch-Site': 'same-site',
-            'Sec-Fetch-Mode': 'cors',
-            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
-        }
-        params = '{"apiVersion":"1.0.0","op":"loadSets:[{\"req\":\"myAll\",\"opts\":{\"category\":\"all\",\"page\":1,\"perPage\":20},\"attrs\":[\"type\",\"id\",\"name\",\"countWords\",\"countWordsLearned\",\"picture\",\"category\",\"status\",\"source\",\"level\"]}]","request":[{"subOp":"myAll","type":"user","perPage":999,"sortBy":"created","attrList":{"type":"type","id":"id","name":"name","countWords":"cw","countWordsLearned":"cl","wordSetId":"wordSetId","picture":"pic","category":"cat","status":"st","source":"src"}}],"ctx":{"config":{"isCheckData":true,"isLogging":true}}}'
-        options_response = self.session.options(url, headers=options_headers)
-        post_response = self.session.post(url, data=params.encode('utf-8'), headers=post_headers)
+        post_response = self.session.post(url, data=params)
         return json.loads(post_response.text)
 
 
@@ -74,30 +83,6 @@ class LingualeoService:
         return json.loads(post_response.text)
 
 
-    # Функция получения перевода слова TODO
-    def get_translate(self, word):
-        url = 'https://api.lingualeo.com/gettranslates'
-        post_headers = {
-            'Host': 'api.lingualeo.com',
-            'Connection': 'close',
-            'Content-Length': '61',
-            'Sec-Fetch-Mode': 'cors',
-            'X-Accept-Language': 'ru',
-            'LinguaLeo-Version': '2.0.3.4',
-            'User-Agent': '{...}',
-            'DNT': '1',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': '*/*',
-            'Sec-Fetch-Site': 'cross-site',
-            'Accept-Encoding': 'gzip, deflate',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Cookie': '{...}'
-        }
-        params = '{"word":%s,"include_media":"1","add_word_forms":"1","port":"1001"}' % word
-        post_response = self.session.post(url, data=params.encode('utf-8'), headers=post_headers)
-        return json.loads(post_response.text)
-
-
     # Функция добавления одного слова в Lingualeo
     def add_word(self, word, translate, context):
         url = 'https://api.lingualeo.com/AddWord'
@@ -116,6 +101,59 @@ class LingualeoService:
             count += 1
         print()
         print("Слова в Lingualeo добавлены!")
+
+
+    # Функция перемещения слова в другой набор (из набора "Слова из интернета")
+    def move_word(self, word_set_id, word_id):
+        url = 'https://api.lingualeo.com/SetWords'
+        options_headers = {
+            'Host': 'api.lingualeo.com',
+            'Access-Control-Request-Method': 'POST',
+            'Origin': 'https://lingualeo.com',
+            'Access-Control-Request-Headers': 'content-type',
+            'Accept': '*/*',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
+        }
+        post_headers = {
+            'Host': 'api.lingualeo.com',
+            'Accept': 'application/json',
+            'Origin': 'https://lingualeo.com',
+            'Content-type': 'application/json',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'cors',
+            'Referer': 'https://lingualeo.com/ru/dictionary/sets/my',
+        }
+        params = '{"apiVersion":"1.0.1","op":"groupActionWithWords {action: add}","data":[{"action":"add","mode":"move","wordSetId":3,"wordIds":[%s],"dateGroups":[],"filter":{"category":"","status":"","training":null,"search":""},"chunk":1,"valueList":{"globalSetId":3,"wordSetId":%s}}],"userData":{"nativeLanguage":"lang_id_src"},"ctx":{"config":{"isCheckData":true,"isLogging":true}}}' % (word_id, word_set_id)
+        options_response = self.session.options(url, headers=options_headers)
+        post_response = self.session.post(url, data=params.encode('utf-8'), headers=post_headers)
+        return json.loads(post_response.text)
+
+
+    # Функция перемещения добавленных в Lingualeo слов в нужный набор слов
+    def move_word_set(self, word_set_id):
+        words, state_count = self.get_words(3), 0
+        print("Перемещение слов в нужный набор...", end="")
+        while words['wordSet']['countWords'] != 0:
+            for elem in words['data'][0]['words']:
+                self.move_word(word_set_id, elem['id'])
+                state_count = (state_count + 1) % 6
+                if state_count == 0:
+                    print("\rПеремещение слов в нужный набор...", end="")
+                elif state_count == 1:
+                    print("\rПеремещение слов в нужный набор ..", end="")
+                elif state_count == 2:
+                    print("\rПеремещение слов в нужный набор  .", end="")
+                elif state_count == 3:
+                    print("\rПеремещение слов в нужный набор   ", end="")
+                elif state_count == 4:
+                    print("\rПеремещение слов в нужный набор.  ", end="")
+                elif state_count == 5:
+                    print("\rПеремещение слов в нужный набор.. ", end="")
+            words = self.get_words(3)
+        print("\r                                  ", end="")
+        print('\rПеремещение слов завершено!')
 
 
     # Функция создания набора слов с данным именем

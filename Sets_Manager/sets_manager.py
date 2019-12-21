@@ -31,6 +31,7 @@ def add_word_set_to_lingualeo(word_set):
         print("Успешная авторизация!")
         set_name = input('Введите имя набора, куда нужно добавить слова: ')
         lingualeo.add_words_set(word_set)
+        lingualeo.move_word_set(4)
     else:
         print("Некорректный email или пароль")
 
@@ -54,8 +55,9 @@ def create_lingualeo_word_set(word_set):
     if not auth_res['error_msg']:
         print("Успешная авторизация!")
         set_name = input('Введите имя создаваемого набора: ')
-        word_sets = lingualeo.get_word_sets()
-        print(word_sets)
+        new_word_set = lingualeo.create_word_set(set_name)
+        lingualeo.add_words_set(word_set)
+        lingualeo.move_word_set(new_word_set['data'][0]['wordSetId'])
     else:
         print("Некорректный email или пароль")
 
