@@ -113709,7 +113709,7 @@ function translate(){
     // перевод с помощью yandexTranslate
     yandexTranslate.translate(word, {to: 'ru'}, function (err,res) {
         let trans = res.text[0];
-        document.getElementById('transcription').value = TextToIPA.lookup(word).text;
+        document.getElementById('transcription').value = TextToIPA.lookup(word.toLowerCase().replace(" ","")).text;
         document.getElementById("translation").value = trans;
     })
 }
