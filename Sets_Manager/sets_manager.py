@@ -29,9 +29,10 @@ def add_word_set_to_lingualeo(word_set):
     auth_res = lingualeo.auth()
     if not auth_res['error_msg']:
         print("Успешная авторизация!")
-        set_name = input('Введите имя набора, куда нужно добавить слова: ')
+        print('Введите ID набора, куда нужно добавить слова (последнее число в url-адресе набора слов):')
+        word_set_id = input()
         lingualeo.add_words_set(word_set)
-        lingualeo.move_word_set(4)
+        lingualeo.move_word_set(word_set_id)
     else:
         print("Некорректный email или пароль")
 
