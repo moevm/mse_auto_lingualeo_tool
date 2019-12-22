@@ -1,0 +1,105 @@
+body {
+    font-family: Open Sans, sans-serif;
+    margin: 0;
+    padding: 5px;
+}
+p {
+    font-size: 14px;
+}
+.input {
+    --greenblue: #28c38a;
+    --charcoal-grey-raw: 55,56,60;
+    --charcoal-grey: #37383c;
+    --bluish-grey: #7e919f;
+    --bluish-grey-raw: 126,145,159;
+    --azul-raw: 37,130,231;
+    --azul: #2582e7;
+    --light-gray: #ccd4dc;
+    --error-red: #f44336;
+    visibility: visible;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: inherit;
+    margin: 0;
+    position: relative;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 16px;
+    color: #37383c;
+    background-color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box!important;
+    transition: all .3s ease-in;
+    caret-color: #37383c;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 4px 0 rgba(34,41,67,.14);
+}
+
+button {
+    outline: none;
+    visibility: visible;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    line-height: 1.15;
+    margin: 0;
+    overflow: visible;
+    -webkit-appearance: button;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    font-family: Open Sans,sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    /*padding: 8px 16px;*/
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all .3s ease-out;
+    box-sizing: border-box;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.button:hover {
+    background: #28ad7c;
+}
+
+.button:active {
+    background: #279c71;
+}
+
+.button {
+    margin-bottom: 5px;
+    height: 30px;
+    width: 100%;
+    background-color: #28c38a;
+
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(34,41,67,.14);
+
+}
+
+.button1:hover {
+    background: #287bd4;
+}
+
+.button1:active {
+    background: #266bb5;
+}
+
+.button1 {
+    background-color: #2582e7;
+    box-shadow: 0 2px 4px 0 rgba(34,41,67,.14);
+    height: 30px;
+    width: 100%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
